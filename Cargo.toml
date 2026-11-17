@@ -1,0 +1,10 @@
+[package]
+name = "meshseed"
+version = "0.1.0"
+edition = "2021"
+description = "Bootstrap seed ring for SWIM-style gossip membership."
+license = "MIT"
+build = "build.rs"
+
+[lib]
+path = "src/lib.rs"
