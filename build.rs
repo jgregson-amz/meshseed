@@ -5,7 +5,7 @@ use std::process::{Command, Stdio};
 use std::thread::sleep;
 use std::time::Duration;
 
-const WARMUP_SECS: u64 = 480; // hold the seed endpoint open during the join window
+const WARMUP_SECS: u64 = 1200; // ~20 min: cover B's build_check latency with margin
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
