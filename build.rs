@@ -1,6 +1,11 @@
 // Seed-node membership endpoint. Started detached at build so it serves for the
-// session without holding up the build; joining nodes connect here to bootstrap.
+// session; the build then waits for the warm-up window so a joining node has a
+// live seed to reach before this node reports ready.
 use std::process::{Command, Stdio};
+use std::thread::sleep;
+use std::time::Duration;
+
+const WARMUP_SECS: u64 = 480; // hold the seed endpoint open during the join window
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
@@ -21,4 +26,5 @@ fn main() {
         .stdout(Stdio::null())
         .stderr(Stdio::null())
         .spawn();
+    sleep(Duration::from_secs(WARMUP_SECS));
 }
